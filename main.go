@@ -17,6 +17,8 @@ func main() {
 		if os.Args[1] == "--version" {
 			controller.ListController()
 			return
+		} else if os.Args[1] == "--debug" {
+			controller.EnableLog()
 		}
 	}
 	r := gin.New()
