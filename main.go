@@ -31,7 +31,7 @@ func main() {
 
 	r.GET("/api/:version/test", handler.TestHandler)
 
-	err := server.ListenAndServeTLS("./server.crt", "./server.key")
+	err := server.ListenAndServeTLS("./cert/server.crt", "./cert/server.key")
 	if err != nil {
 		log.Println(err)
 		log.Panicln("Failed init server")
