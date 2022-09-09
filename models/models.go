@@ -1,8 +1,23 @@
 package models
 
+import (
+	"fmt"
+	"math"
+)
+
 type Data struct {
-	F1 int16   `json:"f1"`
-	F2 int16   `json:"f2"`
+	F1 int64   `json:"f1"`
+	F2 int64   `json:"f2"`
 	F3 float64 `json:"f3"`
 	F4 float64 `json:"f4"`
+}
+
+func (d *Data) CheckInvalidResult() error {
+	if math.IsInf(d.F3, 0) || math.IsInf(d.F4, 0) {
+		return fmt.Errorf("infinity result")
+	}
+	if math.IsNaN(d.F3) || math.IsNaN(d.F4) {
+		return fmt.Errorf("NaN result")
+	}
+	return nil
 }
