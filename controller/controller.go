@@ -21,21 +21,23 @@ type ApiService interface {
 	Serve(cert, key string) error
 }
 
+type IWorker1 interface {
+	HandleInput(a, b int16)
+	Start()
+}
+
+type IWorker2 interface {
+	Inject(a, b int16)
+	GetOutPut() (models.Data, error)
+	Start()
+}
+
 func (c *ControllerV1) Serve(cert, key string) {
 	err := c.apiService.Serve(cert, key)
 	if err != nil {
 		log.Fatal("Unable to load API service")
 	}
 }
-
-// func (c *ControllerV1) CalculateTest(a, b int16) (models.Data, error) {
-// 	return models.Data{
-// 		F1: int64(a + b),
-// 		F2: int64(a * b),
-// 		F3: math.Exp(float64(a)) * math.Exp(float64(b)),
-// 		F4: math.Exp(float64(a)) * (-math.Exp(float64(b))),
-// 	}, nil
-// }
 
 func (c *ControllerV1) CalculateTest(a, b int16) (models.Data, error) {
 	c.Worker1.HandleInput(a, b)
@@ -64,15 +66,8 @@ func (c *ControllerV1) Log(msg string) {
 	}
 }
 
-func (c *ControllerV1) InjectWoker2(a, b int16) {
+func (c *ControllerV1) InjectWorker2(a, b int16) {
 	c.Worker2.Inject(a, b)
-}
-
-func NewController() *ControllerV1 {
-	controller := ControllerV1{
-		ControllerVerSion: "v1",
-	}
-	return &controller
 }
 
 func (c *ControllerV1) StartALl() {
@@ -80,13 +75,9 @@ func (c *ControllerV1) StartALl() {
 	c.Worker2.Start()
 }
 
-type IWorker1 interface {
-	HandleInput(a, b int16)
-	Start()
-}
-
-type IWorker2 interface {
-	Inject(a, b int16)
-	GetOutPut() (models.Data, error)
-	Start()
+func NewController() *ControllerV1 {
+	controller := ControllerV1{
+		ControllerVerSion: "v1",
+	}
+	return &controller
 }

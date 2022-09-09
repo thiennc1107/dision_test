@@ -5,7 +5,7 @@ import (
 )
 
 type IController interface {
-	InjectWoker2(a, b int16)
+	InjectWorker2(a, b int16)
 }
 type worker1 struct {
 	controller IController
@@ -18,7 +18,7 @@ func (w *worker1) Start() {
 		for {
 			a := <-w.a
 			b := <-w.b
-			w.controller.InjectWoker2(a, b)
+			w.controller.InjectWorker2(a, b)
 		}
 	}()
 }
