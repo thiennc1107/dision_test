@@ -13,6 +13,15 @@ type worker1 struct {
 	b          chan int16
 }
 
+func NewWorker1(controller IController) *worker1 {
+	worker := &worker1{
+		controller: controller,
+		a:          make(chan int16, 1),
+		b:          make(chan int16, 1),
+	}
+	return worker
+}
+
 func (w *worker1) Start() {
 	go func() {
 		for {
@@ -28,21 +37,23 @@ func (w *worker1) HandleInput(a, b int16) {
 	w.b <- b
 }
 
-func NewWorker1(controller IController) *worker1 {
-	worker := &worker1{
-		controller: controller,
-		a:          make(chan int16, 1),
-		b:          make(chan int16, 1),
-	}
-	return worker
-}
-
 type worker2 struct {
 	controller IController
 	a          chan int16
 	b          chan int16
 	output     chan models.Data
 	e          chan error
+}
+
+func NewWorker2(controller IController) *worker2 {
+	worker2 := &worker2{
+		controller: controller,
+		a:          make(chan int16),
+		b:          make(chan int16),
+		output:     make(chan models.Data, 1),
+		e:          make(chan error, 1),
+	}
+	return worker2
 }
 
 func (w *worker2) Inject(a, b int16) {
@@ -75,15 +86,4 @@ func (w *worker2) GetOutPut() (models.Data, error) {
 	case data := <-w.output:
 		return data, nil
 	}
-}
-
-func NewWorker2(controller IController) *worker2 {
-	worker2 := &worker2{
-		controller: controller,
-		a:          make(chan int16),
-		b:          make(chan int16),
-		output:     make(chan models.Data, 1),
-		e:          make(chan error, 1),
-	}
-	return worker2
 }
