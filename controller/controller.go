@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"worker/models"
@@ -12,6 +13,8 @@ type ControllerV1 struct {
 	ControllerVerSion string
 	Worker1           IWorker1
 	Worker2           IWorker2
+	Ctx               context.Context
+	Cancel            context.CancelFunc
 }
 
 type ApiService interface {

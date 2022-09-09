@@ -56,12 +56,12 @@ func (w *worker2) Start() {
 			datas, err := models.CalculateTest(<-w.a, <-w.b)
 			if err != nil {
 				w.e <- err
-				return
+				continue
 			}
 			err = datas.CheckInvalidResult()
 			if err != nil {
 				w.e <- err
-				return
+				continue
 			}
 			w.output <- datas
 		}
