@@ -1,7 +1,6 @@
-package server
+package utils
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -13,7 +12,6 @@ func ResponseSucess(c *gin.Context, datas interface{}) {
 		"status": http.StatusOK,
 		"data":   datas,
 	})
-	fmt.Println("test")
 }
 
 func ResponseFailed(c *gin.Context, message string) {
