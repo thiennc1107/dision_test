@@ -21,3 +21,12 @@ func (d *Data) CheckInvalidResult() error {
 	}
 	return nil
 }
+
+func CalculateTest(a, b int16) (Data, error) {
+	return Data{
+		F1: int64(a + b),
+		F2: int64(a * b),
+		F3: math.Exp(float64(a)) * math.Exp(float64(b)),
+		F4: math.Exp(float64(a)) * (-math.Exp(float64(b))),
+	}, nil
+}

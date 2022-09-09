@@ -5,10 +5,14 @@ import (
 	"os"
 	"worker/controller"
 	"worker/handler"
+	"worker/workers"
 )
 
 func main() {
 	ctrller := controller.NewController()
+	ctrller.Worker1 = workers.NewWorker1(ctrller)
+	ctrller.Worker2 = workers.NewWorker2(ctrller)
+	ctrller.StartALl()
 	if len(os.Args) > 1 {
 		switch os.Args[1] {
 		case "--version":
