@@ -14,10 +14,11 @@ import (
 func main() {
 	controller.RegisterController()
 	if len(os.Args) > 1 {
-		if os.Args[1] == "--version" {
+		switch os.Args[1] {
+		case "--version":
 			controller.ListController()
 			return
-		} else if os.Args[1] == "--debug" {
+		case "--debug":
 			controller.EnableLog()
 		}
 	}
