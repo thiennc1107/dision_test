@@ -1,0 +1,13 @@
+2022/09/12 17:33:13 This is a test log
+2022/09/12 17:33:13 worker 2 pending
+2022/09/12 17:33:13 worker 1 pending
+2022/09/12 17:33:13 worker 1 working
+2022/09/12 17:33:13 worker 1 pending
+2022/09/12 17:33:13 worker 2 working
+2022/09/12 17:33:13 sending signal to close worker 1
+2022/09/12 17:33:13 sending signal to close worker 2
+2022/09/12 17:33:13 worker 1 stopping
+2022/09/12 17:33:13 worker 1 stopped
+2022/09/12 17:33:13 worker 2 pending
+2022/09/12 17:33:13 stopping worker 2
+2022/09/12 17:33:13 worker 2 stopped

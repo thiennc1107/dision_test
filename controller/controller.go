@@ -2,7 +2,6 @@ package controller
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"time"
 	"worker/models"
@@ -10,13 +9,18 @@ import (
 
 type ControllerV1 struct {
 	apiService        ApiService
-	enableLog         bool
 	ControllerVerSion string
 	Worker1           IWorker1
 	Worker2           IWorker2
 	ctx               context.Context
 	cancel            context.CancelFunc
 	timeOut           int64
+	Logger            Logger
+	debug             bool
+}
+
+type Logger interface {
+	Log(msg string)
 }
 
 type ApiService interface {
@@ -72,21 +76,15 @@ func (c *ControllerV1) StopAll() {
 }
 
 func (c *ControllerV1) IsDebug() bool {
-	return c.enableLog
+	return c.debug
 }
 
 func (c *ControllerV1) AddApiSerice(serv ApiService) {
 	c.apiService = serv
 }
 
-func (c *ControllerV1) EnableLog() {
-	c.enableLog = true
-}
-
 func (c *ControllerV1) Log(msg string) {
-	if c.enableLog {
-		fmt.Println(msg)
-	}
+	c.Logger.Log(msg)
 }
 
 func (c *ControllerV1) InjectWorker2(input models.Input) {

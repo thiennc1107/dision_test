@@ -10,6 +10,7 @@ import (
 type IController interface {
 	InjectWorker2(input models.Input)
 	GetContext() context.Context
+	Log(msg string)
 }
 type worker1 struct {
 	controller IController
@@ -22,22 +23,22 @@ func (w *worker1) Start() {
 		var input models.Input
 	outer:
 		for {
-			fmt.Println("worker 1 pending")
+			w.controller.Log("worker 1 pending")
 			select {
 			case input = <-w.input:
-				fmt.Println("worker 1 working")
+				w.controller.Log("worker 1 working")
 			case <-w.close:
-				fmt.Println("worker 1 stopping")
+				w.controller.Log("worker 1 stopping")
 				break outer
 			}
 			w.controller.InjectWorker2(input)
 		}
-		fmt.Println("worker 1 stopped")
+		w.controller.Log("worker 1 stopped")
 	}()
 }
 
 func (w *worker1) Stop() {
-	fmt.Println("sending signal to close worker 1")
+	w.controller.Log("sending signal to close worker 1")
 	w.close <- true
 }
 
@@ -77,12 +78,12 @@ func (w *worker2) Start() {
 		for {
 			context := w.controller.GetContext()
 			var input models.Input
-			fmt.Println("worker 2 pending")
+			w.controller.Log("worker 2 pending")
 			select {
 			case input = <-w.input:
-				fmt.Println("worker 2 working")
+				w.controller.Log("worker 2 working")
 			case <-w.close:
-				fmt.Println("stopping worker 2")
+				w.controller.Log("stopping worker 2")
 				break outer
 			}
 			datas, err := models.CalculateTest(input.A, input.B).
@@ -102,12 +103,12 @@ func (w *worker2) Start() {
 				continue
 			}
 		}
-		fmt.Println("worker 2 stopped")
+		w.controller.Log("worker 2 stopped")
 	}()
 }
 
 func (w *worker2) Stop() {
-	fmt.Println("sending signal to close worker 2")
+	w.controller.Log("sending signal to close worker 2")
 	w.close <- true
 }
 
