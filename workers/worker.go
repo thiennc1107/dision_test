@@ -42,6 +42,7 @@ func (w *worker1) Stop() {
 }
 
 func (w *worker1) HandleInput(a, b int16) {
+	time.Sleep(5 * time.Second)
 	input := models.Input{
 		A: a,
 		B: b,
@@ -67,7 +68,6 @@ type worker2 struct {
 }
 
 func (w *worker2) Inject(input models.Input) {
-	time.Sleep(time.Second * 5)
 	w.input <- input
 }
 
@@ -84,12 +84,8 @@ func (w *worker2) Start() {
 				fmt.Println("stopping worker 2")
 				break outer
 			}
-			datas, err := models.CalculateTest(input.A, input.B)
-			if err != nil {
-				w.e <- err
-				continue
-			}
-			err = datas.CheckInvalidResult()
+			datas, err := models.CalculateTest(input.A, input.B).
+				CheckInvalidResult()
 			if err != nil {
 				w.e <- err
 				continue

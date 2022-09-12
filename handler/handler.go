@@ -43,11 +43,6 @@ func (s *ApiSevice) TestHandler(c *gin.Context) {
 		utils.ResponseFailed(c, err.Error())
 		return
 	}
-	err = datas.CheckInvalidResult()
-	if err != nil {
-		utils.ResponseFailed(c, err.Error())
-		return
-	}
 	utils.ResponseSucess(c, datas)
 }
 
