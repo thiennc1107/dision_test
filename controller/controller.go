@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"worker/models"
@@ -12,6 +13,8 @@ type ControllerV1 struct {
 	ControllerVerSion string
 	Worker1           IWorker1
 	Worker2           IWorker2
+	ctx               *context.Context
+	cancel            context.CancelFunc
 }
 
 type ApiService interface {
@@ -24,9 +27,13 @@ type IWorker1 interface {
 }
 
 type IWorker2 interface {
-	Inject(a, b int16)
+	Inject(input models.Input)
 	GetOutPut() (models.Data, error)
 	Start()
+}
+
+func (c *ControllerV1) GetContext() *context.Context {
+	return c.ctx
 }
 
 func (c *ControllerV1) Serve(cert, key string) {
@@ -63,8 +70,8 @@ func (c *ControllerV1) Log(msg string) {
 	}
 }
 
-func (c *ControllerV1) InjectWorker2(a, b int16) {
-	c.Worker2.Inject(a, b)
+func (c *ControllerV1) InjectWorker2(input models.Input) {
+	c.Worker2.Inject(input)
 }
 
 func (c *ControllerV1) StartALl() {
