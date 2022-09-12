@@ -59,7 +59,6 @@ func (c *ControllerV1) CalculateTest(a, b int16) (models.Data, error) {
 	c.StartALl()
 	c.Worker1.HandleInput(a, b)
 	data, err := c.Worker2.GetOutPut()
-	// TODO: create time out response
 	c.StopAll()
 	if err != nil {
 		return models.Data{}, err

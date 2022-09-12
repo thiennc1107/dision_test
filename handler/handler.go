@@ -40,8 +40,13 @@ func (s *ApiSevice) TestHandler(c *gin.Context) {
 	}
 	datas, err := s.controller.CalculateTest(a16, b16)
 	if err != nil {
-		utils.ResponseFailed(c, err.Error())
-		return
+		if err.Error() == utils.RequestTimedOut {
+			utils.ResponseTimeOut(c)
+			return
+		} else {
+			utils.ResponseFailed(c, err.Error())
+			return
+		}
 	}
 	utils.ResponseSucess(c, datas)
 }

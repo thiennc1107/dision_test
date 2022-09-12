@@ -3,8 +3,8 @@ package workers
 import (
 	"context"
 	"fmt"
-	"time"
 	"worker/models"
+	"worker/utils"
 )
 
 type IController interface {
@@ -42,7 +42,7 @@ func (w *worker1) Stop() {
 }
 
 func (w *worker1) HandleInput(a, b int16) {
-	time.Sleep(5 * time.Second)
+	// time.Sleep(5 * time.Second)s
 	input := models.Input{
 		A: a,
 		B: b,
@@ -75,6 +75,7 @@ func (w *worker2) Start() {
 	go func() {
 	outer:
 		for {
+			context := w.controller.GetContext()
 			var input models.Input
 			fmt.Println("worker 2 pending")
 			select {
@@ -87,10 +88,19 @@ func (w *worker2) Start() {
 			datas, err := models.CalculateTest(input.A, input.B).
 				CheckInvalidResult()
 			if err != nil {
-				w.e <- err
+				select {
+				case w.e <- err:
+					continue
+				case <-context.Done():
+					continue
+				}
+			}
+			select {
+			case w.output <- datas:
+				continue
+			case <-context.Done():
 				continue
 			}
-			w.output <- datas
 		}
 		fmt.Println("worker 2 stopped")
 	}()
@@ -102,11 +112,14 @@ func (w *worker2) Stop() {
 }
 
 func (w *worker2) GetOutPut() (models.Data, error) {
+	context := w.controller.GetContext()
 	select {
 	case err := <-w.e:
 		return models.Data{}, err
 	case data := <-w.output:
 		return data, nil
+	case <-context.Done():
+		return models.Data{}, fmt.Errorf(utils.RequestTimedOut)
 	}
 }
 

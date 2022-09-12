@@ -2,9 +2,7 @@ package utils
 
 import "fmt"
 
-const InvalidController = "invalid controller version"
-
-const NotImplemented = "controller not implemented"
+const RequestTimedOut = "request timed out"
 
 func InvalidInput(input string) string {
 	return fmt.Sprintf("Invalid Input %s", input)
