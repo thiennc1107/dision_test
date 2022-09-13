@@ -3,6 +3,7 @@ package models
 import (
 	"fmt"
 	"math"
+	"worker/utils"
 )
 
 type Data struct {
@@ -14,10 +15,10 @@ type Data struct {
 
 func (d Data) CheckInvalidResult() (Data, error) {
 	if math.IsInf(d.F3, 0) || math.IsInf(d.F4, 0) {
-		return d, fmt.Errorf("infinity result")
+		return d, fmt.Errorf(utils.InfinityResult)
 	}
 	if math.IsNaN(d.F3) || math.IsNaN(d.F4) {
-		return d, fmt.Errorf("NaN result")
+		return d, fmt.Errorf(utils.NanResult)
 	}
 	return d, nil
 }

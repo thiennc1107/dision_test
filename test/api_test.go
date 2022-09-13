@@ -68,19 +68,74 @@ var mockRequest = []struct {
 	{
 		Name: "Ok 2",
 		Query: map[string]string{
-			"a": "1",
-			"b": "2",
+			"a": "2",
+			"b": "3",
 		},
 		Status: http.StatusOK,
 		Response: utils.Res{
 			Success: true,
 			Status:  http.StatusOK,
 			Data: models.Data{
-				F1: 9,
-				F2: 20,
-				F3: 8103.083927575383,
-				F4: -8103.083927575383,
+				F1: 5,
+				F2: 6,
+				F3: 148.4131591025766,
+				F4: -148.4131591025766,
 			},
+		},
+	},
+	{
+		Name: "Bad Request 1",
+		Query: map[string]string{
+			"a": "a",
+			"b": "b",
+		},
+		Status: http.StatusBadRequest,
+		Response: utils.Res{
+			Success: false,
+			Status:  http.StatusBadRequest,
+			Message: utils.InvalidInput("a"),
+			Data:    models.Data{},
+		},
+	},
+	{
+		Name: "Bad Request 2",
+		Query: map[string]string{
+			"b": "b",
+		},
+		Status: http.StatusBadRequest,
+		Response: utils.Res{
+			Success: false,
+			Status:  http.StatusBadRequest,
+			Message: utils.InvalidInput(""),
+			Data:    models.Data{},
+		},
+	},
+	{
+		Name: "Bad Request 3",
+		Query: map[string]string{
+			"a": "1",
+			"b": "b",
+		},
+		Status: http.StatusBadRequest,
+		Response: utils.Res{
+			Success: false,
+			Status:  http.StatusBadRequest,
+			Message: utils.InvalidInput("b"),
+			Data:    models.Data{},
+		},
+	},
+	{
+		Name: "Infinite 1",
+		Query: map[string]string{
+			"a": "2",
+			"b": "30000",
+		},
+		Status: http.StatusBadRequest,
+		Response: utils.Res{
+			Success: false,
+			Status:  http.StatusBadRequest,
+			Data:    models.Data{},
+			Message: utils.InfinityResult,
 		},
 	},
 }
