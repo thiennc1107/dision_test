@@ -3,6 +3,7 @@ package workers
 import (
 	"context"
 	"fmt"
+	"sync"
 	"worker/models"
 	"worker/utils"
 )
@@ -18,7 +19,10 @@ type worker1 struct {
 	close      chan bool
 }
 
+var wg sync.WaitGroup
+
 func (w *worker1) Start() {
+	w.controller.Log("Starting worker 1")
 	go func() {
 		var input models.Input
 	outer:
@@ -34,21 +38,30 @@ func (w *worker1) Start() {
 			w.controller.InjectWorker2(input)
 		}
 		w.controller.Log("worker 1 stopped")
+		wg.Done()
 	}()
 }
 
 func (w *worker1) Stop() {
 	w.controller.Log("sending signal to close worker 1")
+	wg.Add(1)
 	w.close <- true
+	wg.Wait()
 }
 
 func (w *worker1) HandleInput(a, b int16) {
-	// time.Sleep(5 * time.Second)s
+	// time.Sleep(3 * time.Second)
 	input := models.Input{
 		A: a,
 		B: b,
 	}
-	w.input <- input
+	context := w.controller.GetContext()
+	select {
+	case <-context.Done():
+		w.controller.Log("Handle Input cancelled")
+	case w.input <- input:
+		w.controller.Log("Input handled")
+	}
 }
 
 func NewWorker1(controller IController) *worker1 {
@@ -69,14 +82,20 @@ type worker2 struct {
 }
 
 func (w *worker2) Inject(input models.Input) {
-	w.input <- input
+	context := w.controller.GetContext()
+	select {
+	case <-context.Done():
+		w.controller.Log("Inject cancelled")
+	case w.input <- input:
+		w.controller.Log("Data transferred")
+	}
 }
 
 func (w *worker2) Start() {
+	w.controller.Log("Starting worker 2")
 	go func() {
 	outer:
 		for {
-			context := w.controller.GetContext()
 			var input models.Input
 			w.controller.Log("worker 2 pending")
 			select {
@@ -86,6 +105,7 @@ func (w *worker2) Start() {
 				w.controller.Log("stopping worker 2")
 				break outer
 			}
+			context := w.controller.GetContext()
 			datas, err := models.CalculateTest(input.A, input.B).
 				CheckInvalidResult()
 			if err != nil {
@@ -104,12 +124,15 @@ func (w *worker2) Start() {
 			}
 		}
 		w.controller.Log("worker 2 stopped")
+		wg.Done()
 	}()
 }
 
 func (w *worker2) Stop() {
 	w.controller.Log("sending signal to close worker 2")
+	wg.Add(1)
 	w.close <- true
+	wg.Wait()
 }
 
 func (w *worker2) GetOutPut() (models.Data, error) {

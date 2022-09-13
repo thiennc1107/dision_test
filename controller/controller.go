@@ -44,7 +44,7 @@ func (c *ControllerV1) GetContext() context.Context {
 	return c.ctx
 }
 
-func (c *ControllerV1) createContext() {
+func (c *ControllerV1) CreateContext() {
 	context, cancel := context.WithTimeout(context.Background(),
 		time.Duration(c.timeOut)*time.Second)
 	c.ctx = context
@@ -59,11 +59,9 @@ func (c *ControllerV1) Serve(cert, key string) {
 }
 
 func (c *ControllerV1) CalculateTest(a, b int16) (models.Data, error) {
-	c.createContext()
-	c.StartALl()
+	c.CreateContext()
 	c.Worker1.HandleInput(a, b)
 	data, err := c.Worker2.GetOutPut()
-	c.StopAll()
 	if err != nil {
 		return models.Data{}, err
 	}
