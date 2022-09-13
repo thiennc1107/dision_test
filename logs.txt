@@ -11,3 +11,126 @@
 2022/09/12 17:33:13 worker 2 pending
 2022/09/12 17:33:13 stopping worker 2
 2022/09/12 17:33:13 worker 2 stopped
+2022/09/13 09:59:13 This is a test log
+2022/09/13 09:59:13 worker 2 pending
+2022/09/13 09:59:13 worker 1 pending
+2022/09/13 09:59:13 worker 1 working
+2022/09/13 09:59:13 worker 1 pending
+2022/09/13 09:59:13 worker 2 working
+2022/09/13 09:59:13 worker 2 pending
+2022/09/13 09:59:13 sending signal to close worker 1
+2022/09/13 09:59:13 sending signal to close worker 2
+2022/09/13 09:59:13 worker 1 stopping
+2022/09/13 09:59:13 worker 1 stopped
+2022/09/13 09:59:13 stopping worker 2
+2022/09/13 09:59:13 worker 2 stopped
+2022/09/13 10:01:10 This is a test log
+2022/09/13 10:01:10 worker 2 pending
+2022/09/13 10:01:10 worker 1 pending
+2022/09/13 10:01:10 worker 1 working
+2022/09/13 10:01:10 worker 1 pending
+2022/09/13 10:01:10 worker 2 working
+2022/09/13 10:01:10 worker 2 pending
+2022/09/13 10:01:10 sending signal to close worker 1
+2022/09/13 10:01:10 sending signal to close worker 2
+2022/09/13 10:01:10 stopping worker 2
+2022/09/13 10:01:10 worker 2 stopped
+2022/09/13 10:01:10 worker 1 stopping
+2022/09/13 10:01:10 worker 1 stopped
+2022/09/13 10:25:49 http: TLS handshake error from [::1]:51454: remote error: tls: bad certificate
+2022/09/13 10:25:49 http: TLS handshake error from [::1]:51455: remote error: tls: bad certificate
+2022/09/13 10:28:38 This is a test log
+2022/09/13 10:28:38 This is a test log
+2022/09/13 10:30:18 This is a test log
+2022/09/13 10:30:18 This is a test log
+2022/09/13 10:30:48 This is a test log
+2022/09/13 10:30:48 worker 2 pending
+2022/09/13 10:30:48 worker 1 pending
+2022/09/13 10:30:48 worker 1 working
+2022/09/13 10:30:48 worker 1 pending
+2022/09/13 10:30:48 worker 2 working
+2022/09/13 10:30:48 worker 2 pending
+2022/09/13 10:30:48 sending signal to close worker 1
+2022/09/13 10:30:48 sending signal to close worker 2
+2022/09/13 10:30:48 worker 1 stopping
+2022/09/13 10:30:48 worker 1 stopped
+2022/09/13 10:30:48 stopping worker 2
+2022/09/13 10:30:48 worker 2 stopped
+2022/09/13 10:30:48 This is a test log
+2022/09/13 10:30:48 worker 2 pending
+2022/09/13 10:30:48 worker 1 pending
+2022/09/13 10:30:48 worker 1 working
+2022/09/13 10:30:48 worker 1 pending
+2022/09/13 10:30:48 worker 2 working
+2022/09/13 10:30:48 worker 2 pending
+2022/09/13 10:30:48 sending signal to close worker 1
+2022/09/13 10:30:48 sending signal to close worker 2
+2022/09/13 10:30:48 worker 1 stopping
+2022/09/13 10:30:48 worker 1 stopped
+2022/09/13 10:30:48 stopping worker 2
+2022/09/13 10:30:48 worker 2 stopped
+2022/09/13 10:32:10 This is a test log
+2022/09/13 10:32:10 worker 2 pending
+2022/09/13 10:32:10 worker 1 pending
+2022/09/13 10:32:10 worker 1 working
+2022/09/13 10:32:10 worker 1 pending
+2022/09/13 10:32:10 worker 2 working
+2022/09/13 10:32:10 sending signal to close worker 1
+2022/09/13 10:32:10 sending signal to close worker 2
+2022/09/13 10:32:10 worker 1 stopping
+2022/09/13 10:32:10 worker 1 stopped
+2022/09/13 10:32:10 worker 2 pending
+2022/09/13 10:32:10 stopping worker 2
+2022/09/13 10:32:10 worker 2 stopped
+2022/09/13 10:34:48 This is a test log
+2022/09/13 10:34:48 worker 2 pending
+2022/09/13 10:34:48 worker 1 pending
+2022/09/13 10:34:48 worker 1 working
+2022/09/13 10:34:48 worker 1 pending
+2022/09/13 10:34:48 worker 2 working
+2022/09/13 10:34:48 sending signal to close worker 1
+2022/09/13 10:34:48 sending signal to close worker 2
+2022/09/13 10:34:48 worker 1 stopping
+2022/09/13 10:34:48 worker 1 stopped
+2022/09/13 10:34:48 worker 2 pending
+2022/09/13 10:34:48 stopping worker 2
+2022/09/13 10:34:48 worker 2 stopped
+2022/09/13 10:34:48 This is a test log
+2022/09/13 10:34:48 worker 2 pending
+2022/09/13 10:34:48 worker 1 pending
+2022/09/13 10:34:48 worker 1 working
+2022/09/13 10:34:48 worker 1 pending
+2022/09/13 10:34:48 worker 2 working
+2022/09/13 10:34:48 worker 2 pending
+2022/09/13 10:34:48 sending signal to close worker 1
+2022/09/13 10:34:48 sending signal to close worker 2
+2022/09/13 10:34:48 worker 1 stopping
+2022/09/13 10:34:48 worker 1 stopped
+2022/09/13 10:34:48 stopping worker 2
+2022/09/13 10:34:48 worker 2 stopped
+2022/09/13 10:39:41 This is a test log
+2022/09/13 10:39:41 worker 1 pending
+2022/09/13 10:39:41 worker 2 pending
+2022/09/13 10:39:41 worker 1 working
+2022/09/13 10:39:41 worker 1 pending
+2022/09/13 10:39:41 worker 2 working
+2022/09/13 10:39:41 worker 2 pending
+2022/09/13 10:39:41 sending signal to close worker 1
+2022/09/13 10:39:41 sending signal to close worker 2
+2022/09/13 10:39:41 worker 1 stopping
+2022/09/13 10:39:41 worker 1 stopped
+2022/09/13 10:39:41 stopping worker 2
+2022/09/13 10:39:41 worker 2 stopped
+2022/09/13 10:39:41 This is a test log
+2022/09/13 10:39:41 worker 2 pending
+2022/09/13 10:39:41 worker 1 pending
+2022/09/13 10:39:41 worker 1 working
+2022/09/13 10:39:41 worker 1 pending
+2022/09/13 10:39:41 worker 2 working
+2022/09/13 10:39:41 worker 2 pending
+2022/09/13 10:39:41 sending signal to close worker 1
+2022/09/13 10:39:41 sending signal to close worker 2
+2022/09/13 10:39:41 worker 1 stopping
+2022/09/13 10:39:41 stopping worker 2
+2022/09/13 10:39:41 worker 2 stopped
+2022/09/13 10:39:41 worker 1 stopped
